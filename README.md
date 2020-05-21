@@ -18,7 +18,7 @@ offical guide： https://microk8s.io/docs
 run the script under folder gfw
 
 # deployments
-Those deployments were running in Minikube before. Some are running in Microk8s
+Those deployments were for Minikube before. Below has been tested in Microk8s already.
 * redis
 * mysql
 
