@@ -11,4 +11,16 @@ Server Version: version.Info{Major:"1", Minor:"18+", GitVersion:"v1.18.2-41+b5cd
 
 ```
 
+# install snap Microk8s
+offical guide： https://microk8s.io/docs
+
+# install k8s image behind k8s
+run the script under gfw
+
+# deploy mysql
+run the script under the folder
+
+# deploy redis
+run the script under the folder
+
 
