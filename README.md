@@ -14,12 +14,38 @@ Server Version: version.Info{Major:"1", Minor:"18+", GitVersion:"v1.18.2-41+b5cd
 # install snap Microk8s
 offical guide： https://microk8s.io/docs
 
-# gfw issue
-run the script under folder gfw
+# install addon
+```bash
+$ microk8s status
+microk8s is running
+addons:
+dashboard: enabled
+dns: enabled
+ingress: enabled
+cilium: disabled
+fluentd: disabled
+gpu: disabled
+helm: disabled
+helm3: disabled
+host-access: disabled
+istio: disabled
+jaeger: disabled
+knative: disabled
+kubeflow: disabled
+linkerd: disabled
+metallb: disabled
+metrics-server: disabled
+prometheus: disabled
+rbac: disabled
+registry: disabled
 
-# deployments
-Those deployments were for Minikube before. Below has been tested in Microk8s already.
+```
+# install 3rd party service 
 * redis
 * mysql
 
+# install own app
 
+
+# gfw issue
+run the script under folder gfw
