@@ -1,33 +1,67 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-pv-1
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 200Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/alex/data/myapp"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myapp-pv-claim
+  labels:
+    app: myapp
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi
+---
 apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: frontend
+  name: myapp
+  labels:
+    app: myapp
 spec:
   selector:
     matchLabels:
-      app: guestbook
+      app: myapp
       tier: frontend
-  replicas: 3
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: guestbook
+        app: myapp
         tier: frontend
     spec:
       containers:
-      - name: myapp
-        image: busybox
-        resources:
-          limits:
-            cpu: 300m
-            memory: 300Mi
+      - image: wordpress:4.8-apache
+        name: myapp
         env:
-        - name: GET_HOSTS_FROM
-          value: dns
-          # If your cluster config does not include a dns service, then to
-          # instead access environment variables to find service host
-          # info, comment out the 'value: dns' line above, and uncomment the
-          # line below:
-          # value: env
+        - name: myapp_DB_HOST
+          value: myapp-mysql
+        - name: myapp_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
         ports:
         - containerPort: 80
+          name: myapp
+        volumeMounts:
+        - name: myapp-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: myapp-persistent-storage
+        persistentVolumeClaim:
+          claimName: myapp-pv-claim

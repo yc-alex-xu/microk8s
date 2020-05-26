@@ -11,3 +11,4 @@ spec:
   #label keys and values that must match in order to receive traffic for this service
   selector:
     app: "mysql-app"
+    tier: mysql

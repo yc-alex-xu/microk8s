@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: "mysql-app"
+        tier: mysql
     spec:
       containers:
       - image: docker.io/mysql:8.0.20
@@ -24,8 +25,12 @@ spec:
             secretKeyRef:
               name: mysql-pass
               key: password      
+        livenessProbe:
+          tcpSocket:
+            port: 3306
         ports:
         - containerPort: 3306
+          name: mysql
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
