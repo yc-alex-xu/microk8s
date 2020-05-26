@@ -46,6 +46,6 @@ registry: disabled
 * deploy the image as srevice
 
 # access myapp
-  http://<cluster ip>
+http://[service ip]
 
 
