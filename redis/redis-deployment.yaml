@@ -27,7 +27,7 @@ spec:
         resources:
           limits:
             cpu: 300m
-            memory: 200Mi
+            memory: 200Mi # Mi:*1024, MB:*1000
       volumes:
       - name: redis-persistent-storage
         persistentVolumeClaim:  
@@ -49,7 +49,7 @@ spec:
       app: redis
       role: slave
       tier: backend
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
