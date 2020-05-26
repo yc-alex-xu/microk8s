@@ -6,6 +6,8 @@ do
     docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName:0.25.1 quay.io/kubernetes-ingress-controller/${imageName}-amd64:0.25.1
     docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/${imageName}:0.25.1
     docker save quay.io/kubernetes-ingress-controller/${imageName}-amd64:0.25.1 > ${imageName}.tar
+    docker rmi  quay.io/kubernetes-ingress-controller/${imageName}-amd64:0.25.1   //untag firstly
+    docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/${imageName}:0.25.1
     microk8s.ctr image import ${imageName}.tar
 done
 
