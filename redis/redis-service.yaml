@@ -1,13 +1,32 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "redis"
+  name: redis-master
   labels:
-    app: "redis-app"
+    app: redis
+    role: master
+    tier: backend
 spec:
   ports:
-  # the port that this service should serve on
   - port: 6379
-  #label keys and values that must match in order to receive traffic for this service
+    targetPort: 6379
   selector:
-    app: "redis-app"
+    app: redis
+    role: master
+    tier: backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-slave
+  labels:
+    app: redis
+    role: slave
+    tier: backend
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: redis
+    role: slave
+    tier: backend
