@@ -15,7 +15,7 @@ microk8s is running
 addons:
 dashboard: enabled
 dns: enabled
-ingress: enabled
+ingress: disabled
 cilium: disabled
 fluentd: disabled
 gpu: disabled
@@ -32,8 +32,9 @@ metrics-server: disabled
 prometheus: disabled
 rbac: disabled
 registry: disabled
-
 ```
+Since the trend is using as service mesh (Istio), no no ingress configured.
+
 # install 3rd party service 
 * redis
 * mysql
