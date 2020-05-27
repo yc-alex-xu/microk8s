@@ -46,6 +46,6 @@ registry: disabled
 * deploy the image as srevice
 
 # access myapp
-http://[service ip]
+http://[ip exposed by service]:8080
 
 
