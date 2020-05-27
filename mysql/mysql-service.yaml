@@ -6,9 +6,7 @@ metadata:
     app: "mysql-app"
 spec:
   ports:
-  # the port that this service should serve on
-  - port: 3306
-  #label keys and values that must match in order to receive traffic for this service
-  selector:
+  - port: 3306  # the port that this service should serve on
+  selector:   #used to match deployment's label
     app: "mysql-app"
     tier: mysql

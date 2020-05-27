@@ -12,7 +12,7 @@ spec:
     type: Recreate
   template:
     metadata:
-      labels:
+      labels: #pod's label must match with deployment selector's 
         app: "mysql-app"
         tier: mysql
     spec:
