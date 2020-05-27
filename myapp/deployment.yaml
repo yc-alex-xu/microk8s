@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: local-pv-1
+  name: myapp-pv-1
   labels:
     type: local
 spec:
@@ -48,19 +48,25 @@ spec:
       - image: justware/myapp:1.0
         name: myapp
         env:
-        - name: myapp_DB_HOST
-          value: myapp-mysql
-        - name: myapp_DB_PASSWORD
+        - name: MySQL_HOST
+          value: mysql
+        - name: MySQL_PASSWORD  #mysql -u root -p
           valueFrom:
             secretKeyRef:
               name: mysql-pass
               key: password
+        - name: Redis_HOST
+          value: redis
+        - name: HTTP_PORT
+          value: "8080"
+        - name: LOG_LEVEL
+          value: "1"    
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: myapp
         volumeMounts:
         - name: myapp-persistent-storage
-          mountPath: /var/www/html
+          mountPath: /usr/myapp/data
       volumes:
       - name: myapp-persistent-storage
         persistentVolumeClaim:
