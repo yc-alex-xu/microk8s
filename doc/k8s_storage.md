@@ -27,9 +27,6 @@ $ kubectl apply -f mysql-pv.yaml
 persistentvolumeclaim/mysql-pv-claim created
 ```
 # summary
-comparing with 
-* [storageClassName: manual](mysql-pv-old.yaml)，
-* [new yaml](mysql/mysql-pv.yaml)
 
 The benefit of storage is: no need to create PV(Persistent Volumes) mnaually,as they will generating automatically.
 ![PV created via storage](images/pv_local.png)
