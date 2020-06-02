@@ -45,6 +45,6 @@ These subfolders in the repo were written for minikube before, they shall work u
 * [docker image] (https://hub.docker.com/repository/docker/justware/myapp)
 
 # myapp as service
-http://[ip exposed by service]:8080
+http://[ip exposed by service]
 
 

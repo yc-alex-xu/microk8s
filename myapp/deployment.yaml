@@ -58,11 +58,11 @@ spec:
         - name: Redis_HOST
           value: redis
         - name: HTTP_PORT
-          value: "8080"
+          value: "80"
         - name: LOG_LEVEL
           value: "1"    
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           name: myapp
         volumeMounts:
         - name: myapp-persistent-storage

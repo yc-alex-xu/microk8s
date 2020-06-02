@@ -6,7 +6,7 @@ metadata:
     app: myapp
 spec:
   ports:
-    - port: 8080
+    - port: 80
   selector:
     app: myapp
     tier: frontend
