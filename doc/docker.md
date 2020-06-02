@@ -211,7 +211,7 @@ image 起一个别名
 将 commit 的image发布到[Docker Hub](https://hub.docker.com/).
 
 ```bash
-alex@minipc:~/base/go$ docker login
+$ docker login
 Authenticating with existing credentials...
 WARNING! Your password will be stored unencrypted in /home/alex/.docker/config.json.
 Configure a credential helper to remove this warning. See
@@ -219,20 +219,27 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
 
-alex@minipc:~/base/go$ docker tag myapp:1.0 justware/myapp:1.0
-alex@minipc:~/base/go$ docker push justware/myapp:1.0
+$ docker tag myapp:1.0 justware/myapp:1.0
+$ docker push justware/myapp:1.0
 The push refers to repository [docker.io/justware/myapp]
 d4c8f5d190a4: Pushed 
 d881dabde4f7: Pushed 
 3e207b409db3: Pushed 
 Post https://registry-1.docker.io/v2/justware/myapp/blobs/uploads/: net/http: TLS handshake timeout
-alex@minipc:~/base/go$ docker push justware/myapp:1.0
+$ docker push justware/myapp:1.0
 The push refers to repository [docker.io/justware/myapp]
 d4c8f5d190a4: Layer already exists 
 d881dabde4f7: Layer already exists 
 3e207b409db3: Layer already exists 
 1.0: digest: sha256:b007de3d4823b1e89b9521fba6f652bb667ab097f39cd92c3ea5c07e1189af1d size: 945
-alex@minipc:~/base/go$ 
+$ 
 
 ```
 ![docker push succeed](images/docker_push.png)
+
+
+# stop docker daemon
+```bash
+c$ sudo systemctl stop docker
+c$ sudo systemctl status docker
+```
