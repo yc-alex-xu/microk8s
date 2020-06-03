@@ -14,7 +14,7 @@ dns: enabled
 <service-name>.<namespace-name>.svc.cluster.local
 
 # test
-start a pod then test
+start a pod then test the dns inside it
 
 ```bash
 $ kubectl run -it --image=busybox --rm --restart=Never sh

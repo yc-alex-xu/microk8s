@@ -17,9 +17,9 @@ a docker system in Linux is comprised of
 
 # 镜像（Image）和容器（Container）的关系，
 
-alex: 容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的 命名空间。因此容器可以拥有自己的 root文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。这种特性使得容器封装的应用比直接在宿主运行更加安全。也因为这种隔离的特性，很多人初学 Docker 时常常会混淆容器和虚拟机。
+容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的 命名空间。因此容器可以拥有自己的 root文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。(alex: sandbox)
 
-alex: image : 静态的一个包,是一个定制的rootfs, 并且unionfs是分层,可以复用的. 通过dockerfile 创建.docker镜像由多个文件系统（只读层）叠加而成，当我们启动一个容器时，docker会加载只读层镜像并在其上（即镜像栈顶部）添加一个读写层。如果已经运行的容器修改了现有的文件，那么会从读写层下面的只读层复制到读写层，该文件只读层依然存在，只是已经被读写层中该文件的复制副本所隐藏。当删除docker容器，或重新启动时，之前的修改将丢失。在docker中，只读层及在顶部的读写层组合被称为Union File System（联合文件系统）
+image : 静态的一个包,是一个定制的rootfs, 并且unionfs是分层,可以复用的. 通过dockerfile 创建.docker镜像由多个文件系统（只读层）叠加而成，当我们启动一个容器时，docker会加载只读层镜像并在其上（即镜像栈顶部）添加一个读写层。如果已经运行的容器修改了现有的文件，那么会从读写层下面的只读层复制到读写层，该文件只读层依然存在，只是已经被读写层中该文件的复制副本所隐藏。(alex: 颇有linux的 copy on write 之风)当删除docker容器，或重新启动时，之前的修改将丢失。在docker中，只读层及在顶部的读写层组合被称为Union File System（联合文件系统）
 
 e.g.
 
@@ -39,9 +39,7 @@ ad86114d2c0a        redis               "docker-entrypoint.s…"   23 seconds ag
 可见镜像（Image）和容器（Container）的关系就类似可执行文件和process的关系。
 
 # 数据卷（Volume）
-按照 Docker 最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用 数据卷（Volume）、或者绑定宿主（host computer or host VM）目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。
-
-数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。
+按照 Docker 最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用 数据卷（Volume）、或者绑定宿主（host computer or host VM）目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。
 
 Volume两种方式创建：
 
@@ -170,33 +168,18 @@ $ sudo docker run -it --name alpine  alpine_alex
 
 # docker build
 
-如何从头生成一个镜像呢？我们可以通过docker build来进行。example:
-
-* [build golang dev env in image](../golang/go_docker.md)
+如何从头生成一个镜像呢？我们可以通过docker build来进行。
 
 # export container
 ```bash
 $ docker export --help
-
-Usage:	docker export [OPTIONS] CONTAINER
-
-Export a container's filesystem as a tar archive
 $ sudo docker export <id> > myUbuntu.tar
 ```
 # create image from file
 Using docker rm, docker rmi to delete image/container
 ```bash
 $ docker import --help
-
-Usage:	docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]
-
-Import the contents from a tarball to create a filesystem image
-
-Options:
-  -c, --change list      Apply Dockerfile instruction to the created image
-  -m, --message string   Set commit message for imported image
 $ cat myUbuntu.tar | docker import - ubuntu:1.1
-
 ```
 # tag
 image 起一个别名

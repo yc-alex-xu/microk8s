@@ -34,6 +34,8 @@ note 1:
 发现 image kubernetesui/dashboard:v2.0.0-rc5 pulling 失败,按 https://github.com/kubernetes/dashboard/releases 操作失败。
 root cause 还是网络问题。在hosts文件加上：199.232.4.133 raw.githubusercontent.com 解决。
 
+note: 更好的方法是根据  raw.githubusercontent.com 后的路径对应到github.com 的地址，然后git clone 下来。
+
 # access dashboard
 ```bash
 $ kubectl proxy --accept-hosts=.* --address=0.0.0.0 & 
