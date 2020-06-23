@@ -49,6 +49,10 @@ These subfolders in the repo were written for minikube before, they shall work u
 # access service: myapp
 * get the cluster ip from dashboard
 * http://<cluster ip>
+
+# TOD
+简化一下，在一个image 中集合redis+mysql+ go程序，只要env中没有redis/mysql的配置，go 程序就访问localost的redis/mysql。 这样不用部署到k8s上也可以测试了。
+
   
 
 
