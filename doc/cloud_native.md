@@ -23,13 +23,15 @@ Kubernetes 这个单词来自于希腊语，含义是 舵手 或 领航员 。�
 Kubernetes 能在实体机或虚拟机集群上调度和运行程序容器。而且，Kubernetes 也能让开发者斩断联系着实体机或虚拟机的“锁链”，从以主机为中心的架构跃至以容器为中心的架构。 
 
 # Kubernetes concept
-[A running Kubernetes cluster contains node agents (kubelet) and master components (APIs, scheduler, etc), on top of a distributed storage solution. ](https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/architecture.md)
-
 Kubernetes is based on docker, but it encapsulate many logic terms:
+
+![k8s](images/k8s.png)
+
+https://mp.weixin.qq.com/s/3sGQvicSOegHibW0I5ctBA
+
 ## node:
 a physical or virtual machine
 
-![node](images/k8s_node.png)
 
 ## pod:
 the unit of deployment, here you can configure memory, cpu power, bandwidth requirement.
