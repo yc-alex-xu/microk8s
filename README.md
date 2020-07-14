@@ -6,7 +6,7 @@
 # Done
 * [overview](doc/cloud_native.md)
 * [docker](doc/docker.md)
-* [run redis in docker](doc/docker_redis.md)
+* [example:run redis in docker](doc/docker_redis.md)
 * [K8s/microk8s](doc/microk8s.md)
 * [redis in k8s cluster](doc/k8s_redis.md)
 * [MySQL in k8s cluster](doc/k8s_mysql.md)
