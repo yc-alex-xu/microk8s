@@ -623,7 +623,7 @@ GEM
       tzinfo (>= 1.0.0)
       tzinfo-data (>= 1.0.0)
       yajl-ruby (~> 1.0)
-    google-protobuf (3.6.0)
+    google-protobuf (3.19.2)
     http (0.9.8)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
