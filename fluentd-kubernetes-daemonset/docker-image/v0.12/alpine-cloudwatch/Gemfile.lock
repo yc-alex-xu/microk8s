@@ -97,7 +97,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.5)
     uuidtools (2.1.5)
-    yajl-ruby (1.4.0)
+    yajl-ruby (1.4.2)
 
 PLATFORMS
   ruby
