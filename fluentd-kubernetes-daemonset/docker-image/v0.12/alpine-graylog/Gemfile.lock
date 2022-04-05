@@ -82,7 +82,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
-    yajl-ruby (1.4.0)
+    yajl-ruby (1.4.2)
 
 PLATFORMS
   ruby
