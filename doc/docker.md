@@ -17,9 +17,9 @@ a docker system in Linux is comprised of
 
 # 镜像（Image）和容器（Container）的关系，
 
-容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的 命名空间。因此容器可以拥有自己的 root文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。(alex: sandbox)
+**Container**的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的 命名空间。因此容器可以拥有自己的 root文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。(alex: sandbox)
 
-image : 静态的一个包,是一个定制的rootfs, 并且unionfs是分层,可以复用的. 通过dockerfile 创建.docker镜像由多个文件系统（只读层）叠加而成，当我们启动一个容器时，docker会加载只读层镜像并在其上（即镜像栈顶部）添加一个读写层。如果已经运行的容器修改了现有的文件，那么会从读写层下面的只读层复制到读写层，该文件只读层依然存在，只是已经被读写层中该文件的复制副本所隐藏。(alex: 颇有linux的 copy on write 之风)当删除docker容器，或重新启动时，之前的修改将丢失。在docker中，只读层及在顶部的读写层组合被称为Union File System（联合文件系统）
+**image** : 静态的一个包,是一个定制的rootfs, 并且unionfs是分层,可以复用的. 通过dockerfile 创建.docker镜像由多个文件系统（只读层）叠加而成，当我们启动一个容器时，docker会加载只读层镜像并在其上（即镜像栈顶部）**添加一个读写层**。如果已经运行的容器修改了现有的文件，那么会从读写层下面的只读层复制到读写层，该文件只读层依然存在，只是已经被读写层中该文件的复制副本所隐藏。(alex: 颇有linux的 copy on write 之风)当删除docker容器，或重新启动时，之前的修改将丢失。在docker中，只读层及在顶部的读写层组合被称为Union File System（联合文件系统）
 
 e.g.
 
@@ -36,7 +36,7 @@ ad86114d2c0a        redis               "docker-entrypoint.s…"   23 seconds ag
 5e3266b1da2b        redis               "docker-entrypoint.s…"   46 hours ago        Exited (0) 46 hours ago                       quirky_jennings
 80d9c46e29d1        hello-world         "/hello"                 47 hours ago        Exited (0) 47 hours ago                       hungry_albattani
 ```
-可见镜像（Image）和容器（Container）的关系就类似可执行文件和process的关系。
+
 
 # 数据卷（Volume）
 按照 Docker 最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用 数据卷（Volume）、或者绑定宿主（host computer or host VM）目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。
@@ -141,12 +141,10 @@ $ sudo apt-get purge docker-ce
 * docker volume
 
 # commit
-对Container 修改后，可以用 docker commit 命令永久话，就是创建一个新image.
+对Container 修改后，可以用 docker commit 命令**永久化**，就是创建一个新image.
+> Small！Simple！Secure！Alpine Linux is a security-oriented, lightweight Linux distribution based on musl libc and busybox.
 
-e.g. 
-"Small！Simple！Secure！Alpine Linux is a security-oriented, lightweight Linux distribution based on musl libc and busybox.”
-以Alpine Linux image 为基础创建自己的image.
-
+e.g.  以Alpine Linux image 为基础创建自己的image.
 ```bash
 $ sudo docker pull alpine  
 $ sudo docker run -it alpine
@@ -223,6 +221,6 @@ $
 
 # stop docker daemon
 ```bash
-c$ sudo systemctl stop docker
-c$ sudo systemctl status docker
+$ sudo systemctl stop docker
+$ sudo systemctl status docker
 ```
